@@ -1,4 +1,4 @@
-class Drag{
+class InternalDrag{
 	constructor(empties, fill){
 		this.empties = empties
 		this.fill = fill
@@ -6,8 +6,8 @@ class Drag{
 		this.handleFill()
 	}
 	handleFill(){
-		fill.addEventListener("dragstart", this.dragStart)
-		fill.addEventListener("dragstart", this.dragEnd)
+		this.fill.addEventListener("dragstart", this.dragStart)
+		this.fill.addEventListener("dragstart", this.dragEnd)
 	}
 	dragStart(){
 		setTimeout(() => {
@@ -36,13 +36,13 @@ class Drag{
 			this.classList.remove('border')
 		}
 		function dragDrop(e){
+			e.preventDefault()
 			this.classList.remove('border')
 			newFill.className = classname
 			this.appendChild(newFill)
 		}
 	}
 }
-const empties = document.querySelectorAll(".empty"),
-	fill = document.querySelector(".fill")
-
-const drag = new Drag(empties, fill)
+const empties = document.querySelectorAll(".empty")
+const fill = document.querySelector(".fill")
+new InternalDrag(empties, fill)
