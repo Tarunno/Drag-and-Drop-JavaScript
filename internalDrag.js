@@ -7,7 +7,7 @@ class InternalDrag{
 	}
 	handleFill(){
 		this.fill.addEventListener("dragstart", this.dragStart)
-		this.fill.addEventListener("dragstart", this.dragEnd)
+		this.fill.addEventListener("dragend", this.dragEnd)
 	}
 	dragStart(){
 		setTimeout(() => {
@@ -22,17 +22,15 @@ class InternalDrag{
 		var classname = this.fill.className
 		for(const empty of this.empties){
 			empty.addEventListener('dragover', dragOver)
-			empty.addEventListener('dragenter', dragEnter)
 			empty.addEventListener('dragleave', dragLeave)
 			empty.addEventListener('drop', dragDrop)
 		}
 		function dragOver(e){
 			e.preventDefault()
-		}
-		function dragEnter(){
 			this.classList.add('border')
 		}
-		function dragLeave(){
+		function dragLeave(e){
+			e.preventDefault()
 			this.classList.remove('border')
 		}
 		function dragDrop(e){
